@@ -1,7 +1,7 @@
 # ZapDICOMCleaner
 Program to remove problems from Zap TPS export files to import them in other systems.
 
-Zap plan exports in version DP-1007 of TPS have varioos problems in at least the RT structure file. This programm could open one or more Zip files and repair this problems.
+Zap plan exports in version DP-1007 of TPS have various problems in at least the RTSTRUCT file. This programm could open one or more Zip files and repair this problems.
 
 ## Problems in RTSTRUCT files
 #### DICOM tag (3006,0040)
