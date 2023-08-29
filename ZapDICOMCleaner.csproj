@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Themes\SplashScreen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="fo-dicom" Version="5.1.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Themes\SplashScreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </SplashScreen>
+  </ItemGroup>
+
+</Project>
