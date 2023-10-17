@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZapDICOMCleaner"
         mc:Ignorable="d"
-        Title="ZapDICOMCleaner" Height="600" Width="800" FontSize="16" Style="{DynamicResource CustomWindowStyle}" >
+        Title="ZapDICOMCleaner" Height="600" Width="800" FontSize="16" Style="{StaticResource CustomWindowStyle}" >
     <DockPanel LastChildFill="True">
         <StatusBar DockPanel.Dock="Bottom" Height="30" VerticalAlignment="Bottom" FontSize="16" >
             <StatusBar.ItemsPanel>
