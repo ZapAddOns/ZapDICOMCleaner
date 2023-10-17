@@ -143,6 +143,8 @@ namespace ZapDICOMCleaner
 
                 foreach (var file in files)
                 {
+                    lblActiveFile.Text = file;
+
                     var dicomFile = ExportZipFile.ReadDICOMRTStructFile(file);
 
                     if (dicomFile != null)
@@ -172,7 +174,7 @@ namespace ZapDICOMCleaner
                 }
 
                 barProgress.Value = 0;
-                lblActivePatient.Text = "";
+                lblActiveFile.Text = "";
 
                 lbFiles.ItemsSource = null;
                 lbFiles.ItemsSource = _files;
