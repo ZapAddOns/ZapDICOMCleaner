@@ -1,7 +1,11 @@
 # ZapDICOMCleaner
-Program to remove problems from Zap TPS export files to import them in other systems.
+Program to remove problems from Zap TPS import or export files to import them in other systems.
 
-Zap plan export in version DP-1007 and DP-1008 of TPS has various problems in at least the RTSTRUCT file, so that files couldn't be imported on some other systems. This programm could open one or more Zip files and repair this problems.
+Zap plan export in version DP-1007 to DP-1010 of TPS has various problems in at least the RTSTRUCT file, so that files couldn't be imported on some other systems. This programm could open one or more Zip files and repair this problems.
+
+## Problems in DCM files
+#### DICOM tag (0010,1002)
+This optional tag is included in CT series from Siemens scanners. Zap's sysImageService.exe crashes with this tag because of a bug.
 
 ## Problems in RTSTRUCT files
 #### DICOM tag (3006,0040)
