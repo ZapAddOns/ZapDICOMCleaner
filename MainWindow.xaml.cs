@@ -26,7 +26,7 @@ namespace ZapDICOMCleaner
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Multiselect = true;
-            openFileDialog.Filter = "Zip files (*.zip)|*.zip|All files (*.*)|*.*";
+            openFileDialog.Filter = "Zip files (*.zip)|*.zip|DICOM files (*.dcm)|*.dcm|All files (*.*)|*.*";
             var initialDirectory = AppSettings.Get("FilePath", Directory.GetCurrentDirectory());
             if (!Directory.Exists(initialDirectory))
             {
@@ -94,6 +94,7 @@ namespace ZapDICOMCleaner
                 foreach (var folder in openFolderDialog.SelectedPaths)
                 {
                     files.AddRange(Directory.GetFiles(folder, "*.zip"));
+                    files.AddRange(Directory.GetFiles(folder, "*.dcm"));
                 }
 
                 foreach (var file in files)
@@ -137,6 +138,7 @@ namespace ZapDICOMCleaner
                 Mouse.OverrideCursor = Cursors.Wait;
 
                 var files = new List<string>(_files);
+                var tagToRemove = new DicomTag(0x0010, 0x1002);
 
                 barProgress.Maximum = files.Count;
                 barProgress.Value = 0;
@@ -145,29 +147,47 @@ namespace ZapDICOMCleaner
                 {
                     lblActiveFile.Text = file;
 
-                    var dicomFile = ExportZipFile.ReadDICOMRTStructFile(file);
-
-                    if (dicomFile != null)
+                    if (Path.GetExtension(file).ToLower() == ".dcm")
                     {
-                        if (cbStructureVolume.IsChecked == true)
-                            ConvertToLongStructureVolumeString(dicomFile);
-                        if (cbContourCoordinates.IsChecked == true)
-                            ConvertToLongCoordianteStrings(dicomFile);
-                        if (cbContourColor.IsChecked == true)
-                            ConvertToStructureColors(dicomFile);
-                        if (cbStructureManyTypes.IsChecked == true)
-                            ConvertAllContoursToCoplanar(dicomFile);
+                        if (cbOtherPatientIDsSequence.IsChecked == true)
+                        {
+                            var df = DicomFile.Open(file, FileReadOption.ReadAll);
 
-                        try
-                        {
-                            ExportZipFile.WriteDICOMRTStructFile(file, dicomFile);
-                        }
-                        catch
-                        {
-                            continue;
+                            if (df.Dataset.Contains(tagToRemove) && df.Dataset.GetSequence(tagToRemove).Items.Count == 0)
+                            {
+                                df.Dataset.Remove(tagToRemove);
+                                df.Save(file);
+                            }
                         }
 
                         _files.Remove(file);
+                    }
+                    else
+                    {
+                        var dicomFile = ExportZipFile.ReadDICOMRTStructFile(file);
+
+                        if (dicomFile != null)
+                        {
+                            if (cbStructureVolume.IsChecked == true)
+                                ConvertToLongStructureVolumeString(dicomFile);
+                            if (cbContourCoordinates.IsChecked == true)
+                                ConvertToLongCoordianteStrings(dicomFile);
+                            if (cbContourColor.IsChecked == true)
+                                ConvertToStructureColors(dicomFile);
+                            if (cbStructureManyTypes.IsChecked == true)
+                                ConvertAllContoursToCoplanar(dicomFile);
+
+                            try
+                            {
+                                ExportZipFile.WriteDICOMRTStructFile(file, dicomFile);
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+
+                            _files.Remove(file);
+                        }
                     }
 
                     barProgress.Value++;
