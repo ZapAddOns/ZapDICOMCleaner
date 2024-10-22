@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZapDICOMCleaner"
         mc:Ignorable="d"
-        Title="ZapDICOMCleaner" Height="600" Width="800" FontSize="16" Style="{StaticResource CustomWindowStyle}" >
+        Title="ZapDICOMCleaner" Height="768" Width="1024" FontSize="16" Style="{StaticResource CustomWindowStyle}" >
     <DockPanel LastChildFill="True">
         <StatusBar DockPanel.Dock="Bottom" Height="30" VerticalAlignment="Bottom" FontSize="16" >
             <StatusBar.ItemsPanel>
@@ -30,7 +30,7 @@
         <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="170"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -44,10 +44,11 @@
             </StackPanel>
             <Button x:Name="btnClean" Grid.Column="1" Grid.Row="1" Content="Clean File(s)" Width="120" Height="30" Margin="10,10,30,30" VerticalAlignment="Bottom" Click="btnClean_Click" IsEnabled="False"/>
             <TextBlock Text="Correct the following things" HorizontalAlignment="Left" Margin="30,0,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-            <CheckBox x:Name="cbStructureVolume" Content="(3006,002C) Structure volume over 16 characters" HorizontalAlignment="Left" Margin="30,30,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
-            <CheckBox x:Name="cbStructureManyTypes" Content="(3006,0042) Structure with many countour types" HorizontalAlignment="Left" Margin="30,60,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-            <CheckBox x:Name="cbContourCoordinates" Content="(3006,0050) Contour coordinates over 16 characters" HorizontalAlignment="Left" Margin="30,90,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
-            <CheckBox x:Name="cbContourColor" Content="(3006,002A) Contour color with more than RGB" HorizontalAlignment="Left" Margin="30,120,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
+            <CheckBox x:Name="cbOtherPatientIDsSequence" Content="(0010,1002) Other Patient IDs Sequence is empty" HorizontalAlignment="Left" Margin="30,30,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
+            <CheckBox x:Name="cbStructureVolume" Content="(3006,002C) Structure volume over 16 characters" HorizontalAlignment="Left" Margin="30,60,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
+            <CheckBox x:Name="cbStructureManyTypes" Content="(3006,0042) Structure with many countour types" HorizontalAlignment="Left" Margin="30,90,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <CheckBox x:Name="cbContourCoordinates" Content="(3006,0050) Contour coordinates over 16 characters" HorizontalAlignment="Left" Margin="30,120,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
+            <CheckBox x:Name="cbContourColor" Content="(3006,002A) Contour color with more than RGB" HorizontalAlignment="Left" Margin="30,150,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
         </Grid>
     </DockPanel>
 </Window>
